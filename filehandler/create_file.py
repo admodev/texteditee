@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 
 def prompt_filename():
     try:
@@ -22,28 +23,31 @@ def createfile():
 
         if filename is None:
             print("File creation cancelled.")
-            
             return
 
         print('Opening file for edition...')
-        
+
         time.sleep(2)
 
-        with open(filename, 'w', encoding='utf-8') as new_file:
+        home_dir = os.path.expanduser("~")
+        file_path = os.path.join(home_dir, "editee", filename + ".edtee")
+
+        os.makedirs(os.path.join(home_dir, "editee"), exist_ok=True)
+
+        with open(file_path, 'w', encoding='utf-8') as new_file:
             print("File opened. Enter text line by line.")
             print("Press Ctrl+D (Unix/macOS) or Ctrl+Z then Enter (Windows) to finish input.")
-            
-            # Read from standard input line by line until EOF or Ctrl+Q
+
             try:
                 while True:
                     line = sys.stdin.readline()
-                    
-                    if not line: # Check for EOF (Ctrl+D or Ctrl+Z+Enter)
+
+                    if not line:  # Check for EOF (Ctrl+D or Ctrl+Z+Enter)
                         break
 
-                    new_file.write(line) # Write the line (includes newline)
- 
-            except KeyboardInterrupt: # Handle Ctrl+C
+                    new_file.write(line)  # Write the line (includes newline)
+
+            except KeyboardInterrupt:  # Handle Ctrl+C
                 print("\nInput interrupted (Ctrl+C). File might be incomplete.")
 
         print(f"Saving and closing file: {filename}")
