@@ -1,6 +1,6 @@
 import os
 import sys
-from filehandler import create_file, read_file
+from filehandler import create_file, edit_file, read_file
 
 def main():
     print("||==================================||======================||=============================||")
@@ -22,8 +22,7 @@ def main():
             print('Enter the name of the file to delete:')
             return None
         case 'c':
-            print('Select the file you want to continue editing...')
-            return None
+            edit_file.editfile()
         case 'r':
             read_file.fileread()
             return None
