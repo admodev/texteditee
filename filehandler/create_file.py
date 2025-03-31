@@ -1,4 +1,3 @@
-import time
 import sys
 import os
 
@@ -26,8 +25,6 @@ def createfile():
             return
 
         print('Opening file for edition...')
-
-        time.sleep(2)
 
         home_dir = os.path.expanduser("~")
         file_path = os.path.join(home_dir, "editee", filename + ".edtee")
