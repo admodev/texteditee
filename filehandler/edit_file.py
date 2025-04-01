@@ -11,7 +11,7 @@ try:
   files_path = os.path.join(home_dir, "editee")
   editee_files = os.listdir(files_path)
 except Exception as e:
-  print(f"An error has occured while trying to set directories. {e}")
+  print(f"An error has occurred while trying to set directories. {e}")
 
 def editfile():
   files: list[str] = file_utils.list_files()
@@ -68,5 +68,5 @@ def editfile():
   except FileNotFoundError:
     print(f"The file {file} cannot be found.")
   except Exception as e:
-    print(f"An error has occured! {e}")
+    print(f"An error has occurred! {e}")
 
