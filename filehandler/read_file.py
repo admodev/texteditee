@@ -1,5 +1,6 @@
 import os
-from utils import file_utils, regexes
+import sys
+from utils import file_utils, regexes, screen_utils
 
 home_dir: str
 files_path: str
@@ -39,9 +40,9 @@ def fileread():
 
   selected_file_index: int = int(selected_file)
   selected_file_path = os.path.join(files_path, files[selected_file_index])
-  print(f"Reading selected file: {files[selected_file_index]}")
-
-
+  
+  screen_utils.clear_sc()
+  print(f"Reading selected file: {files[selected_file_index]}. Press Ctrl+D (Unix/macOS) or Ctrl+Z then Enter (Windows) to quit reading mode.\n")
 
   try:
       with open(selected_file_path, 'r', encoding='utf-8') as file_to_read:
@@ -49,7 +50,14 @@ def fileread():
           
           print(file_content)
           
-          return file_content
+          try:
+            while True:
+              read = sys.stdin.readline()
+            
+              if not read:
+                break
+          except KeyboardInterrupt:
+                print("\nInput interrupted (Ctrl+C). File might be incomplete.")
   except FileNotFoundError:
       print(f"The file %s cannot be found.", file)
   except Exception as e:
