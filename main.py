@@ -1,7 +1,10 @@
 import sys
 from filehandler import create_file, delete_file, edit_file, read_file
+from utils import screen_utils
 
 def main():
+    screen_utils.clear_sc()
+    
     print("||==================================||======================||=============================||")
     print("||==================================||Welcome to TextEditee!||=============================||")
     print("||==================================||======================||=============================||")
