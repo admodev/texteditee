@@ -1,6 +1,6 @@
 import sys
 import os
-from utils import regexes
+from utils import file_utils, regexes
 
 home_dir: str
 files_path: str
@@ -13,24 +13,8 @@ try:
 except Exception as e:
   print(f"An error has occured while trying to set directories. {e}")
 
-# TODO!: move this repetitive code into a util/helper function
-def list_files():
-  try:
-    home_dir = os.path.expanduser("~")
-    files_path = os.path.join(home_dir, "editee")
-    editee_files = os.listdir(files_path)
-
-    return editee_files
-  except Exception as e:
-      print(f"An error has occured while trying to list files. {e}")
-      return []
-
-def loop_files(files: list[str]):
-    for i in range(len(files)):
-        print(f"{i}: {files[i]}")
-
 def editfile():
-  files: list[str] = list_files()
+  files: list[str] = file_utils.list_files()
   selected_file: str = ""
   selected_file_index: int
   selected_file_path: str
@@ -42,14 +26,14 @@ def editfile():
 
   print('Select the file you want to edit:')
 
-  loop_files(files)
+  file_utils.loop_files(files)
 
   while has_selected_file is not True:
     selected_file = str(input()).strip().lower()
 
     if regexes.contains_non_numeric_char(selected_file) or regexes.is_whitespace(selected_file) or len(selected_file) == 0:
       print("Please, select the file by inserting the number that corresponds to its index.")
-      loop_files(files)
+      file_utils.loop_files(files)
     else:
       has_selected_file = True
 
