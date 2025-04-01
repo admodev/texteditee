@@ -1,6 +1,5 @@
-import os
 import sys
-from filehandler import create_file, edit_file, read_file
+from filehandler import create_file, delete_file, edit_file, read_file
 
 def main():
     print("||==================================||======================||=============================||")
@@ -19,13 +18,11 @@ def main():
         case 'w':
             create_file.createfile()
         case 'd':
-            print('Enter the name of the file to delete:')
-            return None
+            delete_file.deletefile()
         case 'c':
             edit_file.editfile()
         case 'r':
             read_file.fileread()
-            return None
         case 'q':
             print('Thank you for using TextEditee! Bye.')
             sys.exit()
