@@ -1,6 +1,8 @@
 import os
 from utils import file_utils, regexes, screen_utils
 
+from prompt_toolkit import prompt
+
 home_dir: str
 files_path: str
 editee_files: str
@@ -27,8 +29,8 @@ def deletefile():
 
   file_utils.loop_files(files)
 
-  while has_selected_file is not True:
-    selected_file = str(input()).strip().lower()
+  while not has_selected_file:
+    selected_file = prompt("Select file index: ").strip().lower()
 
     if regexes.contains_non_numeric_char(selected_file) or regexes.is_whitespace(selected_file) or len(selected_file) == 0:
       print("Please, select the file by inserting the number that corresponds to its index.")
