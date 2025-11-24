@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Custom themes support
+
 ### Changed
 
 - Renamed Insert mode to Edit mode
