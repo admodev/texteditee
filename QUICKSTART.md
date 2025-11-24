@@ -61,7 +61,7 @@ python -m src.texteditee.main mynewfile.txt
 ### 2. Basic Editing
 
 1. **Start in Normal Mode** - You can navigate but not type
-2. **Press `i`** to enter Insert Mode
+2. **Press `i`** to enter Edit Mode
 3. **Type your text**
 4. **Press `Esc`** to return to Normal Mode
 5. **Type `:w`** and press `Enter` to save
@@ -81,8 +81,8 @@ python -m src.texteditee.main mynewfile.txt
 
 **Editing (Normal Mode):**
 
-- `i` - Insert before cursor
-- `a` - Insert after cursor
+- `i` - Edit before cursor
+- `a` - Edit after cursor
 - `o` - Open new line below
 - `x` - Delete character
 - `dd` - Delete line
@@ -108,14 +108,14 @@ python -m src.texteditee.main hello.py
 #    Use j/k to move down/up
 #    Use w/b to move by words
 
-# 3. Enter insert mode
+# 3. Enter Edit mode
 #    Press 'i'
 
 # 4. Type your code
 #    def hello():
 #        print("Hello, World!")
 
-# 5. Exit insert mode
+# 5. Exit Edit mode
 #    Press Esc
 
 # 6. Save and quit
@@ -153,7 +153,7 @@ Movement:
   gg G        - First line, last line
 
 Editing:
-  i a I A     - Insert modes
+  i a I A     - Edit modes
   o O         - Open line below/above
   x dd D      - Delete char/line/to-end
   yy p P      - Yank/paste
@@ -165,13 +165,13 @@ Other:
   v V         - Visual mode
 ```
 
-### Insert Mode
+### Edit Mode
 
 ```
 Esc         - Exit to Normal mode
 Backspace   - Delete previous char
 Enter       - New line
-Tab         - Insert spaces
+Tab         - Insert spaces (4)
 ```
 
 ### Command Mode
@@ -187,7 +187,7 @@ Tab         - Insert spaces
 
 ## Tips
 
-1. **Stay in Normal Mode** - Only enter Insert Mode when typing
+1. **Stay in Normal Mode** - Only enter Edit Mode when typing
 2. **Use Counts** - `5j` moves down 5 lines
 3. **Learn Word Motions** - `w` and `b` are very efficient
 4. **Practice** - Vim-style editing has a learning curve but becomes very fast

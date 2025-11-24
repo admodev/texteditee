@@ -31,7 +31,7 @@ te myfile.py
 ### First Steps
 
 1. When you open TextEditee, you start in **Normal Mode**
-2. Press `i` to enter **Insert Mode** and start typing
+2. Press `i` to enter **Edit Mode** and start typing
 3. Press `Esc` to return to **Normal Mode**
 4. Type `:w` and press `Enter` to save
 5. Type `:q` and press `Enter` to quit
@@ -43,13 +43,13 @@ te myfile.py
 TextEditee uses vim-style modal editing:
 
 - **Normal Mode**: Navigate and execute commands
-- **Insert Mode**: Type text
+- **Edit Mode**: Type text
 - **Visual Mode**: Select text
 - **Command Mode**: Execute ex commands
 
 ### The Cursor
 
-The cursor shows your current position in the file. In Normal Mode, it's on a character. In Insert Mode, it's between characters.
+The cursor shows your current position in the file. In Normal Mode, it's on a character. In Edit Mode, it's between characters.
 
 ## Modes
 
@@ -59,20 +59,20 @@ The default mode for navigation and commands.
 
 **Enter from:**
 
-- Insert Mode: Press `Esc`
+- Edit Mode: Press `Esc`
 - Visual Mode: Press `Esc`
 - Command Mode: Press `Esc` or `Enter`
 
-### Insert Mode
+### Edit Mode
 
 For typing text.
 
 **Enter from Normal Mode:**
 
-- `i` - Insert before cursor
-- `a` - Insert after cursor
-- `I` - Insert at beginning of line
-- `A` - Insert at end of line
+- `i` - Edit before cursor
+- `a` - Edit after cursor
+- `I` - Edit at beginning of line
+- `A` - Edit at end of line
 - `o` - Open new line below
 - `O` - Open new line above
 
@@ -149,13 +149,13 @@ F{char} - Find previous {char} on current line
 
 ## Editing
 
-### Inserting Text
+### Editing Text
 
 ```
-i - Insert before cursor
-a - Insert after cursor
-I - Insert at line start
-A - Insert at line end
+i - Edit before cursor
+a - Edit after cursor
+I - Edit at line start
+A - Edit at line end
 o - Open line below
 O - Open line above
 ```
@@ -292,7 +292,7 @@ Available themes:
 
 ### Efficient Editing
 
-1. **Stay in Normal Mode** - Only enter Insert Mode when typing
+1. **Stay in Normal Mode** - Only enter Edit Mode when typing
 2. **Use Counts** - `5j` is faster than pressing `j` five times
 3. **Learn Word Motions** - `w`, `b`, `e` are very efficient
 4. **Use Line Operations** - `dd`, `yy` work on whole lines
@@ -339,8 +339,8 @@ Available themes:
 | w, b, e    | Word forward, backward, end      |
 | 0, ^, $    | Line start, first non-blank, end |
 | gg, G      | First line, last line            |
-| i, a       | Insert before, after             |
-| I, A       | Insert at line start, end        |
+| i, a       | Edit before, after               |
+| I, A       | Edit at line start, end          |
 | o, O       | Open line below, above           |
 | x          | Delete character                 |
 | dd         | Delete line                      |
@@ -352,14 +352,14 @@ Available themes:
 | :          | Command mode                     |
 | v, V       | Visual mode                      |
 
-### Insert Mode
+### Edit Mode
 
 | Key       | Action                    |
 | --------- | ------------------------- |
 | Esc       | Exit to Normal mode       |
 | Backspace | Delete previous character |
 | Enter     | New line                  |
-| Tab       | Insert spaces             |
+| Tab       | Insert spaces (4)         |
 
 ### Command Mode
 

@@ -14,7 +14,7 @@ class Mode(Enum):
     def __str__(self) -> str:
         return {
             Mode.NORMAL: 'NORMAL',
-            Mode.INSERT: '-- INSERT --',
+            Mode.INSERT: '-- EDIT --',
             Mode.VISUAL: '-- VISUAL --',
             Mode.VISUAL_LINE: '-- VISUAL LINE --',
             Mode.VISUAL_BLOCK: '-- VISUAL BLOCK --',

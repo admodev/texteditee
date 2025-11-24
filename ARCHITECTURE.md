@@ -16,7 +16,7 @@
 │  │      2        │     print("Hello!")                      │  │
 │  │      3        │                                          │  │
 │  ├──────────────────────────────────────────────────────────┤  │
-│  │  Status Line: filename.py [+] 2,5 -- INSERT --          │  │
+│  │  Status Line: filename.py [+] 2,5 -- EDIT --          │  │
 │  ├──────────────────────────────────────────────────────────┤  │
 │  │  Command Line: :w                                        │  │
 │  └──────────────────────────────────────────────────────────┘  │
@@ -41,7 +41,7 @@
 │  │  KeyBindings     │  │  CommandParser                     │  │
 │  │  - handle_key()  │  │  - parse()                         │  │
 │  │  - normal_mode   │  │  - :w, :q, :e, :s                  │  │
-│  │  - insert_mode   │  │  - substitution                    │  │
+│  │  - edit_mode   │  │  - substitution                    │  │
 │  │  - visual_mode   │  │  - goto line                       │  │
 │  └──────────────────┘  └────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
@@ -54,13 +54,13 @@
 │  │  Buffer      │  │  Cursor      │  │  Viewport    │         │
 │  │  - Gap       │  │  - position  │  │  - scroll    │         │
 │  │    Buffer    │  │  - move()    │  │  - visible   │         │
-│  │  - insert()  │  │  - navigate()│  │  - render    │         │
+│  │  - edit()  │  │  - navigate()│  │  - render    │         │
 │  │  - delete()  │  │              │  │    area      │         │
 │  └──────────────┘  └──────────────┘  └──────────────┘         │
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐  │
 │  │  ModeManager                                             │  │
-│  │  - Normal │ Insert │ Visual │ Command │ Search          │  │
+│  │  - Normal │ Edit │ Visual │ Command │ Search          │  │
 │  │  - transitions and mode-specific behavior               │  │
 │  └──────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────┘
