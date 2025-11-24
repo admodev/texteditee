@@ -41,7 +41,7 @@ functionEnd
 
 section "install"
     setOutPath $INSTDIR
-    File "..\dist\texteditee.exe"
+    File "..\..\dist\texteditee.exe"
     
     writeUninstaller "$INSTDIR\uninstall.exe"
     
@@ -64,9 +64,6 @@ section "install"
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "NoModify" 1
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "NoRepair" 1
     WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}" "EstimatedSize" ${INSTALLSIZE}
-    
-    EnVar::SetHKLM
-    EnVar::AddValue "PATH" "$INSTDIR"
 sectionEnd
 
 function un.onInit
@@ -88,7 +85,4 @@ section "uninstall"
     rmDir $INSTDIR
     
     DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
-    
-    EnVar::SetHKLM
-    EnVar::DeleteValue "PATH" "$INSTDIR"
 sectionEnd
