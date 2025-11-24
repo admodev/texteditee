@@ -17,13 +17,15 @@ A professional vim-style terminal code editor built with Python 3.12+
 
 ## Installation
 
-### From Binary (Recommended)
+### From Binary
 
-Download the latest release for your platform:
+**Note**: Binaries need to be built first (see [Building from Source](#building-from-source) below).
 
-- **Windows**: Download and run `TextEditee-Setup.exe`
-- **macOS**: Download and open `TextEditee.dmg`
-- **Linux**: Download `texteditee` binary or install via package manager
+Once built, you'll have:
+
+- **Windows**: `dist\TextEditee-Setup.exe` (installer) or `dist\texteditee.exe` (standalone)
+- **macOS**: `dist/texteditee` (standalone binary)
+- **Linux**: `dist/texteditee` (standalone binary)
 
 ### From Source
 

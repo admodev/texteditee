@@ -4,12 +4,12 @@ REM Windows build script for TextEditee
 echo Building TextEditee for Windows...
 
 REM Install dependencies
-pip install -r requirements.txt
-pip install pyinstaller
+python -m pip install -r requirements.txt
+python -m pip install pyinstaller
 
 REM Build executable
 cd installers
-pyinstaller --clean --onefile build.pyinstaller
+python -m pyinstaller --clean --onefile build.pyinstaller
 
 REM Create installer with NSIS (if available)
 if exist "C:\Program Files (x86)\NSIS\makensis.exe" (
