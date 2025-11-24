@@ -238,7 +238,3 @@ MIT License - See LICENSE file for details
 ## Why TextEditee?
 
 Because Python can be a great choice for almost any use case, including building professional-grade terminal editors. TextEditee proves that Python's ecosystem and modern language features make it suitable for creating fast, efficient, and user-friendly development tools.
-
----
-
-**Made with ❤️ by the TextEditee Contributors**
