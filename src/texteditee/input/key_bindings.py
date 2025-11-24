@@ -80,10 +80,10 @@ def setup_default_bindings(registry: KeyBindingRegistry, editor: 'Editor') -> No
     registry.register('G', lambda e, c: e.goto_line(e.buffer.line_count - 1 if c == 1 else c - 1), 
                      'normal', 'Last line / Go to line')
     
-    registry.register('i', lambda e, c: e.enter_insert_mode(), 'normal', 'Insert before cursor')
-    registry.register('a', lambda e, c: e.enter_insert_mode_after(), 'normal', 'Insert after cursor')
-    registry.register('I', lambda e, c: e.insert_at_line_start(), 'normal', 'Insert at line start')
-    registry.register('A', lambda e, c: e.insert_at_line_end(), 'normal', 'Insert at line end')
+    registry.register('i', lambda e, c: e.enter_insert_mode(), 'normal', 'Edit before cursor')
+    registry.register('a', lambda e, c: e.enter_insert_mode_after(), 'normal', 'Edit after cursor')
+    registry.register('I', lambda e, c: e.insert_at_line_start(), 'normal', 'Edit at line start')
+    registry.register('A', lambda e, c: e.insert_at_line_end(), 'normal', 'Edit at line end')
     registry.register('o', lambda e, c: e.open_line_below(), 'normal', 'Open line below')
     registry.register('O', lambda e, c: e.open_line_above(), 'normal', 'Open line above')
     

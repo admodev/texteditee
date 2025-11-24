@@ -4,7 +4,7 @@ A professional vim-style terminal code editor built with Python 3.12+
 
 ## Features
 
-✨ **Modal Editing** - Full vim-style modal editing (Normal, Insert, Visual, Command modes)  
+✨ **Modal Editing** - Full vim-style modal editing (Normal, Edit, Visual, Command modes)  
 ⌨️ **Vim Keybindings** - Comprehensive vim keybindings for efficient text editing  
 🎨 **Syntax Highlighting** - Multi-language syntax highlighting powered by Pygments  
 ↩️ **Undo/Redo** - Unlimited undo/redo with action grouping  
@@ -17,13 +17,15 @@ A professional vim-style terminal code editor built with Python 3.12+
 
 ## Installation
 
-### From Binary (Recommended)
+### From Binary
 
-Download the latest release for your platform:
+**Note**: Binaries need to be built first (see [Building from Source](#building-from-source) below).
 
-- **Windows**: Download and run `TextEditee-Setup.exe`
-- **macOS**: Download and open `TextEditee.dmg`
-- **Linux**: Download `texteditee` binary or install via package manager
+Once built, you'll have:
+
+- **Windows**: `dist\TextEditee-Setup.exe` (installer) or `dist\texteditee.exe` (standalone)
+- **macOS**: `dist/texteditee` (standalone binary)
+- **Linux**: `dist/texteditee` (standalone binary)
 
 ### From Source
 
@@ -72,8 +74,8 @@ texteditee
 
 **Editing:**
 
-- `i`, `a` - Insert before/after cursor
-- `I`, `A` - Insert at line start/end
+- `i`, `a` - Edit before/after cursor
+- `I`, `A` - Edit at line start/end
 - `o`, `O` - Open line below/above
 - `x` - Delete character
 - `dd` - Delete line
@@ -111,12 +113,12 @@ Press `:` to enter command mode:
 - `:s/pattern/replacement/` - Substitute on current line
 - `:{start},{end}s/pattern/replacement/` - Substitute on range
 
-#### Insert Mode
+#### Edit Mode
 
 - `Esc` - Return to normal mode
 - `Backspace` - Delete previous character
 - `Enter` - New line
-- `Tab` - Insert 4 spaces
+- `Tab` - Insert spaces (4)
 
 ## Configuration
 

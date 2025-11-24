@@ -5,12 +5,26 @@ All notable changes to TextEditee will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - In Development
+
+### Added
+
+- Custom themes support
+
+### Changed
+
+- Renamed Insert mode to Edit mode
+
+### Fixed
+
+- Fixed Windows installer
+
 ## [1.0.0] - 2025-11-24
 
 ### Added
 
 - Initial release of TextEditee
-- Modal editing system (Normal, Insert, Visual, Command modes)
+- Modal editing system (Normal, Edit, Visual, Command modes)
 - Vim-style keybindings
   - Navigation: h, j, k, l, w, b, e, 0, $, ^, gg, G
   - Editing: i, a, I, A, o, O, x, dd, D

@@ -53,6 +53,7 @@ class Editor:
         self.command_parser.register('x', lambda e: (e.save() if e.buffer.modified else None, e.quit()))
         self.command_parser.register('e', lambda e, *args: e.open_file(args[0] if args else ''))
         self.command_parser.register('set', lambda e, *args: e.set_option(args[0] if args else ''))
+        self.command_parser.register('setheme', lambda e, *args: e.set_theme(args[0] if args else ''))
     
     def run(self) -> None:
         with self.term.fullscreen(), self.term.cbreak(), self.term.hidden_cursor():
@@ -308,6 +309,13 @@ class Editor:
     def interrupt(self) -> None:
         self.key_bindings.clear_pending()
         self.mode_manager.to_normal()
+    
+    def set_theme(self, theme_name: str) -> None:
+        if self.theme_manager.set_theme(theme_name):
+            self.message = f'Theme changed to: {theme_name}'
+        else:
+            available = ', '.join(self.theme_manager.list_themes())
+            self.message = f'Unknown theme. Available: {available}'
 
 
 def main() -> None:

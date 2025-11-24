@@ -68,6 +68,27 @@ THEMES: Dict[str, ColorScheme] = {
         error='#F92672',
         warning='#E6DB74',
     ),
+    'solarized_dark': ColorScheme(
+        name='solarized_dark',
+        background='#002B36',
+        foreground='#839496',
+        cursor='#839496',
+        selection='#073642',
+        line_number='#586E75',
+        status_bg='#073642',
+        status_fg='#839496',
+        keyword='#268BD2',
+        function='#B58900',
+        class_name='#2AA198',
+        string='#859900',
+        comment='#586E75',
+        number='#D33682',
+        operator='#268BD2',
+        builtin='#2AA198',
+        decorator='#B58900',
+        error='#DC322F',
+        warning='#CB4B16',
+    ),
 }
 
 
