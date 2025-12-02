@@ -42,26 +42,35 @@ class Renderer:
         with self.term.hidden_cursor():
             print(self.term.home + self.term.clear, end='')
             
-            visible_lines = viewport.get_visible_lines()
-            screen_height = self.term.height - 2
+            # Render title bar at the top
+            self._render_title_bar(buffer)
             
+            visible_lines = viewport.get_visible_lines()
+            # Adjust for title bar (1 line) + help lines (2 lines) = 3 total
+            screen_height = self.term.height - 3
+            
+            # Start rendering from line 1 (line 0 is title bar)
             for i, line in enumerate(visible_lines[:screen_height]):
                 line_num = viewport.top_line + i
-                self._render_line(line_num, line, i)
+                self._render_line(line_num, line, i + 1)  # +1 to skip title bar
             
+            # Render empty lines with tilde
             for i in range(len(visible_lines), screen_height):
-                print(self.term.move_xy(0, i) + self.term.cyan('~'))
+                print(self.term.move_xy(0, i + 1) + self.term.cyan('~'))
             
-            self._render_status_line(buffer, cursor, mode)
-            
-            screen_line, screen_col = viewport.cursor_to_screen_pos(
-                cursor.line, cursor.col
-            )
-            
-            if self.show_line_numbers:
-                screen_col += self._line_number_width(buffer) + 1
-            
-            print(self.term.move_xy(screen_col, screen_line), end='', flush=True)
+            # Render help lines at the bottom (nano-style)
+            self._render_help_lines(buffer, cursor, mode)
+        
+        # Position cursor (outside hidden_cursor context so it shows)
+        screen_line, screen_col = viewport.cursor_to_screen_pos(
+            cursor.line, cursor.col
+        )
+        screen_line += 1  # +1 for title bar
+        
+        if self.show_line_numbers:
+            screen_col += self._line_number_width(buffer) + 1
+        
+        print(self.term.move_xy(screen_col, screen_line), end='', flush=True)
     
     def _render_line(self, line_num: int, line: str, screen_line: int) -> None:
         output = ''
@@ -93,47 +102,61 @@ class Renderer:
         
         print(self.term.move_xy(0, screen_line) + output)
     
-    def _render_status_line(self, buffer: 'Buffer', cursor: 'Cursor', mode: 'Mode') -> None:
-        status_y = self.term.height - 2
-        
+    def _render_title_bar(self, buffer: 'Buffer') -> None:
+        """Render nano-style title bar at the top"""
         filename = buffer.filename or '[No Name]'
-        modified = ' [+]' if buffer.modified else ''
-        position = f'{cursor.line + 1},{cursor.col + 1}'
+        modified = ' [Modified]' if buffer.modified else ''
+        
+        # Center the filename with version on left
+        version = 'TextEditee v1.0.0'
+        title = f'  {version}          {filename}{modified}'
+        
+        # Pad to full width
+        title = title[:self.term.width].ljust(self.term.width)
+        
+        # Use inverted colors for title bar (like nano)
+        title_formatted = self.term.black_on_white(title)
+        
+        with self.term.location(0, 0):
+            print(title_formatted)
+    
+    def _render_help_lines(self, buffer: 'Buffer', cursor: 'Cursor', mode: 'Mode') -> None:
+        """Render nano-style help lines at the bottom showing keybindings"""
+        help_y1 = self.term.height - 2
+        help_y2 = self.term.height - 1
+        
         mode_str = str(mode)
         
-        left_side = f' {filename}{modified}'
-        right_side = f'{position} '
+        # Define help text based on mode
+        if 'NORMAL' in mode_str:
+            line1 = ":w Save   :q Quit   :wq Save&Quit  i Edit   / Search   dd Delete  yy Copy   p Paste"
+            line2 = "h←  j↓  k↑  l→   w Word→  b Word←  gg Top  G Bottom  u Undo  ^R Redo  : Command"
+        elif 'EDIT' in mode_str or 'INSERT' in mode_str:
+            line1 = "ESC Exit Edit Mode                  Backspace Delete    Enter New Line"
+            line2 = "Type to insert text                 Arrow keys to move  Tab Insert spaces"
+        elif 'COMMAND' in mode_str:
+            line1 = "Enter Execute    ESC Cancel    :w Save  :q Quit  :wq Save&Quit  :q! Force Quit"
+            line2 = ":e file Open  :123 Go to line  :s/old/new Replace  :set option  :theme name"
+        elif 'VISUAL' in mode_str:
+            line1 = "ESC Exit Visual    d Delete    y Yank/Copy    p Paste    hjkl Move Selection"
+            line2 = "v Char Mode    V Line Mode    Movement keys extend selection"
+        else:
+            line1 = ":w Save   :q Quit   i Edit   / Search   dd Delete  yy Copy   p Paste"
+            line2 = "h←  j↓  k↑  l→   Movement   u Undo  : Command Mode   ESC Normal Mode"
         
-        padding = self.term.width - len(left_side) - len(right_side) - len(mode_str) - 2
-        status_line = left_side + ' ' * max(0, padding) + mode_str + ' ' + right_side
+        # Pad to full width and truncate if needed
+        line1 = line1[:self.term.width].ljust(self.term.width)
+        line2 = line2[:self.term.width].ljust(self.term.width)
         
-        status_bg = self.theme.get_color('status_bg')
-        status_fg = self.theme.get_color('status_fg')
+        # Use inverted colors (white on black) for help lines
+        line1_formatted = self.term.white_on_black(line1)
+        line2_formatted = self.term.white_on_black(line2)
         
-        bg_map = {
-            'black': 'black',
-            'blue': 'blue',
-            'white': 'white',
-            '#3E3D32': 'black',
-            '#073642': 'black',
-        }
-        fg_map = {
-            'white': self.term.white,
-            '#F8F8F2': self.term.white,
-            '#839496': self.term.white,
-        }
+        with self.term.location(0, help_y1):
+            print(line1_formatted)
         
-        bg_name = bg_map.get(status_bg, 'blue')
-        fg_func = fg_map.get(status_fg, self.term.white)
-        
-        try:
-            bg_func = getattr(self.term, f'on_{bg_name}')
-            status_formatted = bg_func(fg_func(status_line[:self.term.width]))
-        except (AttributeError, TypeError):
-            status_formatted = self.term.on_blue(self.term.white(status_line[:self.term.width]))
-        
-        with self.term.location(0, status_y):
-            print(status_formatted)
+        with self.term.location(0, help_y2):
+            print(line2_formatted)
     
     def _colorize(self, text: str, color_name: str) -> str:
         color_attr_map = {

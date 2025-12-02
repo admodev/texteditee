@@ -21,7 +21,7 @@ class Editor:
         self.buffer = Buffer(filename or '')
         self.cursor = Cursor(self.buffer)
         self.mode_manager = ModeManager()
-        self.viewport = Viewport(self.buffer, self.term.height - 2, self.term.width)
+        self.viewport = Viewport(self.buffer, self.term.height - 3, self.term.width)
         self.theme_manager = ThemeManager()
         self.renderer = Renderer(self.term, self.theme_manager)
         self.key_bindings = KeyBindingRegistry()
